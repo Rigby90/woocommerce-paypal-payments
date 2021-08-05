@@ -28,23 +28,21 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
-
+    
     - name: Run test suite
       run: ./vendor/bin/phpunit
-    - name: Run Woocommerce coding standards
-      run: ./vendor/bin/phpcs src modules woocommerce-paypal-payments.php --extensions=php
-    - uses: actions/checkout@v2
+    
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run build --if-present
-    - name: Publish
-      uses: softprops/action-gh-release@v1
+    
+    - name: Upload
+      uses: actions/upload-artifact@v2
       with:
-        files: "woocommerce-paypal-payments.zip"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: package
+          path: "woocommerce-paypal-payments.zip"
       
         
