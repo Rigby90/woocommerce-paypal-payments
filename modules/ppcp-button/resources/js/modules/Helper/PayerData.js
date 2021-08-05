@@ -1,7 +1,7 @@
 export const payerData = () => {
     const payer = PayPalCommerceGateway.payer;
     if (! payer) {
-        return null;
+        // return null;
     }
 
     const phone = (document.querySelector('#billing_phone') || typeof payer.phone !== 'undefined') ?
